@@ -1,0 +1,49 @@
+{
+  "name": "async-event-emitter2",
+  "version": "0.0.1",
+  "description": "Just like EventEmitter, but with support for callbacks and interruption of the listener-chain",
+  "main": "build/async-event-emitter2.min.js",
+  "module": "build/async-event-emitter2.min.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "npm run version && npm run lint && npm run test && npm run coverage && npm run webpack",
+    "clean": "npm run clean:build && npm run clean:coverage",
+    "clean:build": "shx rm -rf build",
+    "clean:coverage": "shx rm -rf coverage",
+    "coverage": "c8 --check-coverage --lines 80 --functions 80 --branches 80 --statements 80 --clean --reporter=text --reporter=html --include=src/*.js --exclude=src/version.js mocha test/**/*.test.js",
+    "lint": "eslint -c .eslintrc.json --fix src && prettier --config .prettierrc.json --write src/**/*.js test/**/*.js *.ts",
+    "start": "npm run webpack",
+    "test": "mocha test/**/*.test.js",
+    "version": "node -p -e \"'module.exports = \\'' + require('./package.json').version + '\\';'\" > src/version.js",
+    "webpack": "webpack --progress --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PantelisGeorgiadis/async-event-emitter2.git"
+  },
+  "keywords": [
+    "async",
+    "callback",
+    "event",
+    "eventemitter"
+  ],
+  "author": "Pantelis Georgiadis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PantelisGeorgiadis/async-event-emitter2/issues"
+  },
+  "homepage": "https://github.com/PantelisGeorgiadis/async-event-emitter2",
+  "dependencies": {
+    "async": "^3.2.6"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.10",
+    "c8": "^9.1.0",
+    "chai": "^4.3.10",
+    "eslint": "^8.57.0",
+    "mocha": "^11.2.2",
+    "prettier": "^3.6.2",
+    "webpack": "^5.99.8",
+    "webpack-cli": "^6.0.1"
+  }
+}
