@@ -1,9 +1,10 @@
 [![NPM version][npm-version-image]][npm-url] [![NPM downloads][npm-downloads-image]][npm-url] [![build][build-image]][build-url] [![MIT License][license-image]][license-url] 
 
 # async-event-emitter2
-> An EventEmitter that supports serial execution of asynchronous event listeners. It also supports event listeners without callbacks (synchronous), as well as interrupting the call-chain (similar to the DOM's e.stopPropagation()).
 
-Original [async-eventemitter][async-eventemitter-url] package by [Andreas Hultgren][ahultgren-url] wasn't updated for several years now and this is an effort to support newer versions.
+The original [async-eventemitter][async-eventemitter-url] package by [Andreas Hultgren][ahultgren-url] wasn't updated for several years now and this is an effort to support newer versions. Below is the original README: 
+
+> An EventEmitter that supports serial execution of asynchronous event listeners. It also supports event listeners without callbacks (synchronous), as well as interrupting the call-chain (similar to the DOM's e.stopPropagation()).
 
 ## Example
 ```js
@@ -11,7 +12,7 @@ const AsyncEventEmitter2 = require('async-event-emitter2');
 const events = new AsyncEventEmitter2();
 
 events.on('test', (e, next) => {
-  // The next event listener will wait til this is done
+  // The next event listener will wait till this is done
   setTimeout(next, 1000);
 });
 
@@ -22,12 +23,12 @@ events
     // { data: 'data' }
   })
   .on('test', (e, next) => {
-    // Even if you're not truly asynchronous you can use next() to stop propagation
+    // Even if this is not truly asynchronous, next() can be used to stop propagation
     next(new Error('You shall not pass'));
   });
 
 events.emit('test', { data: 'data' }, (err) => {
-  // This is run after all of the event listeners are done
+  // This runs after all event listeners are done
   console.log(err);
   // [Error: You shall not pass]
 });
@@ -39,7 +40,7 @@ The API and behavior of AsyncEventEmitter is as far as possible and meaningful i
 
 * Data sent to event listeners (`e.g. emit(data)`) must always be **zero** or **one** argument, and can *not* be a function.
 * Event listeners will always receive the data object, which may or may not be undefined.
-* The second argument can only be a callback, and will only be supplied if the event listener has an arity of two or more (e.g. `function(e, next){}`).
+* The second argument can only be a callback, and will only be supplied if the event listener has an arity of two or more (e.g. `(e, next) => { }`).
 * Event listeners with an arity of one or zero (e.g. without a callback argument specified) will be treated as synchronous.
 * Even if all event listeners are synchronous, they will still be executed asynchronously (through setImmediate) and thus code succeeding `.emit()` will be executed before any event listeners.
 * Interrupt the callback chain in async listeners by calling the callback with the error as the first parameter; in sync listeners by throwing an Error.

@@ -1,6 +1,6 @@
 {
   "name": "async-event-emitter2",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Just like EventEmitter, but with support for callbacks and interruption of the listener-chain",
   "main": "build/async-event-emitter2.min.js",
   "module": "build/async-event-emitter2.min.js",
@@ -37,13 +37,13 @@
     "async": "^3.2.6"
   },
   "devDependencies": {
-    "@types/node": "^24.0.10",
+    "@types/node": "^24.0.12",
     "c8": "^9.1.0",
     "chai": "^4.3.10",
     "eslint": "^8.57.0",
     "mocha": "^11.2.2",
     "prettier": "^3.6.2",
-    "webpack": "^5.99.8",
+    "webpack": "^5.100.0",
     "webpack-cli": "^6.0.1"
   }
 }
